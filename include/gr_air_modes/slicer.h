@@ -37,7 +37,7 @@ namespace air_modes {
 class AIR_MODES_API slicer : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<slicer> sptr;
+    typedef std::shared_ptr<slicer> sptr;
     static sptr make(gr::msg_queue::sptr queue);
 };
 

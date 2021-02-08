@@ -141,7 +141,6 @@ add_custom_target(uninstall
 ########################################################################
 add_subdirectory(include/gr_air_modes)
 add_subdirectory(lib)
-add_subdirectory(swig)
 add_subdirectory(python)
 add_subdirectory(grc)
 add_subdirectory(apps)

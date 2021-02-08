@@ -36,7 +36,7 @@ namespace air_modes {
 class AIR_MODES_API preamble : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<preamble> sptr;
+    typedef std::shared_ptr<preamble> sptr;
     static sptr make(float channel_rate, float threshold_db);
 
     virtual void set_rate(float channel_rate) = 0;
