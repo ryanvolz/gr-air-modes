@@ -25,8 +25,8 @@
 
 #include <gnuradio/sync_block.h>
 #include <gnuradio/msg_queue.h>
-#include <gr_air_modes/api.h>
-#include <gr_air_modes/slicer.h>
+#include <air_modes/api.h>
+#include <air_modes/slicer.h>
 
 namespace gr {
 namespace air_modes {

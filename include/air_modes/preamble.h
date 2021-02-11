@@ -24,7 +24,7 @@
 #define INCLUDED_AIR_MODES_PREAMBLE_H
 
 #include <gnuradio/block.h>
-#include <gr_air_modes/api.h>
+#include <air_modes/api.h>
 
 namespace gr {
 namespace air_modes {

@@ -21,17 +21,14 @@
 '''
 This is the GNU Radio gr-air-modes package. It provides a library and
 application for receiving Mode S / ADS-B signals from aircraft. Use
-uhd_modes.py as the main application for receiving signals. cpr.py
+modes_rx as the main application for receiving signals. cpr.py
 provides an implementation of Compact Position Reporting. altitude.py
 implements Gray-coded altitude decoding. Various plugins exist for SQL,
 KML, and PlanePlotter-compliant SBS-1 emulation output. mlat.py provides
 an experimental implementation of a multilateration solver.
 '''
 
-from __future__ import unicode_literals
-
-# import swig generated symbols into the gr-air-modes namespace
-from .air_modes_swig import *
+from .air_modes_python import *
 
 # import any pure python here
 #
@@ -55,6 +52,8 @@ from .modes_types import *
 from .altitude import *
 from .cpr import cpr_decoder
 from .html_template import html_template
+from .msgq_runner import msgq_runner
+
 #this is try/excepted in case the user doesn't have numpy installed
 try:
     from .flightgear import output_flightgear

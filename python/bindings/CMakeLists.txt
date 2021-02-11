@@ -29,7 +29,9 @@ include(GrPybind)
 ########################################################################
 
 list(APPEND air_modes_python_files
-    python_bindings.cc)
+    python_bindings.cc
+    preamble_python.cc
+    slicer_python.cc)
 
 GR_PYBIND_MAKE_OOT(air_modes 
    ../..

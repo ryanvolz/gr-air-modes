@@ -22,7 +22,7 @@
 # Project setup
 ########################################################################
 cmake_minimum_required(VERSION 3.8)
-project(gr-air-modes CXX C)
+project(gr-air_modes CXX C)
 enable_testing()
 
 #install to PyBOMBS target prefix if defined
@@ -85,10 +85,16 @@ ELSE()
     message(WARNING "C standard could not be set because compiler is not GNU, Clang or MSVC.")
 ENDIF()
 
+find_package(pybind11 REQUIRED)
+execute_process(
+    COMMAND "${PYTHON_EXECUTABLE}" -c
+    "try:\n import numpy\n import os\n inc_path = numpy.get_include()\n if os.path.exists(os.path.join(inc_path, 'numpy', 'arrayobject.h')):\n  print(inc_path, end='')\nexcept:\n pass"
+    OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIR)
+
 ########################################################################
 # Find gnuradio build dependencies
 ########################################################################
-find_package(Gnuradio "3.8" REQUIRED)
+find_package(Gnuradio "3.9" REQUIRED)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
@@ -136,13 +142,16 @@ add_custom_target(uninstall
     ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
 )
 
+install(FILES cmake/Modules/air_modesConfig.cmake
+    DESTINATION ${CMAKE_MODULES_DIR}/air_modes
+)
+
 ########################################################################
 # Add subdirectories
 ########################################################################
-add_subdirectory(include/gr_air_modes)
+add_subdirectory(include/air_modes)
 add_subdirectory(lib)
 add_subdirectory(python)
 add_subdirectory(grc)
 add_subdirectory(apps)
-add_subdirectory(docs)
 add_subdirectory(res)

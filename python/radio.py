@@ -23,7 +23,7 @@
 # You pass it options, it gives you data.
 # It uses the pubsub interface to allow clients to subscribe to its data feeds.
 
-from gnuradio import gr, gru, eng_notation, filter, blocks
+from gnuradio import gr, eng_notation, filter, blocks
 from gnuradio.filter import optfir
 from gnuradio.eng_option import eng_option
 from gnuradio.gr.pubsub import pubsub
@@ -81,7 +81,7 @@ class modes_radio (gr.top_block, pubsub):
         server_addr += ["tcp://*:%i" % options.tcp]
 
     self._sender = air_modes.zmq_pubsub_iface(context, subaddr=None, pubaddr=server_addr)
-    self._async_sender = gru.msgq_runner(self._queue, self.send)
+    self._async_sender = air_modes.msgq_runner(self._queue, self.send)
 
   def send(self, msg):
     self._sender["dl_data"] = msg.to_string()

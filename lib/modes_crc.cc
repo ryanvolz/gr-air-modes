@@ -25,8 +25,8 @@
 #endif
 
 #include <stdio.h>
-#include <gr_air_modes/types.h>
-#include <gr_air_modes/modes_crc.h>
+#include <air_modes/types.h>
+#include <air_modes/modes_crc.h>
 #include <math.h>
 #include <stdlib.h>
 

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(slicer.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(eec2a2cee44fc77b3705ab2abfac8702)                     */
+/* BINDTOOL_HEADER_FILE_HASH(de5bad12b8ae0f22c88c9cd886eaf8cc)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,20 +23,21 @@
 
 namespace py = pybind11;
 
-#include <air-modes/slicer.h>
+#include <air_modes/slicer.h>
 // pydoc.h is automatically generated in the build directory
 #include <slicer_pydoc.h>
 
 void bind_slicer(py::module& m)
 {
 
-    using slicer    = gr::air-modes::slicer;
+    using slicer    = ::gr::air_modes::slicer;
 
 
-    py::class_<slicer, gr::block, gr::basic_block,
+    py::class_<slicer, gr::sync_block, gr::block, gr::basic_block,
         std::shared_ptr<slicer>>(m, "slicer", D(slicer))
 
         .def(py::init(&slicer::make),
+           py::arg("queue"),
            D(slicer,make)
         )
         

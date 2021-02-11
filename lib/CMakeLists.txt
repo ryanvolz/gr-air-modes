@@ -22,22 +22,29 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
-add_library(air_modes SHARED
+set(air_modes_sources
     preamble_impl.cc
     slicer_impl.cc
     modes_crc.cc
 )
-target_link_libraries(air_modes gnuradio::gnuradio-runtime)
-target_include_directories(air_modes
+
+set(air_modes_sources "${air_modes_sources}" PARENT_SCOPE)
+
+add_library(gnuradio-air_modes SHARED
+    ${air_modes_sources}
+)
+target_link_libraries(gnuradio-air_modes gnuradio::gnuradio-runtime)
+target_include_directories(gnuradio-air_modes
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
   )
-set_target_properties(air_modes PROPERTIES DEFINE_SYMBOL "AIR_MODES_EXPORTS")
-set_target_properties(air_modes PROPERTIES SOVERSION "${VERSION_MAJOR}")
-set_target_properties(air_modes PROPERTIES VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
+
+set_target_properties(gnuradio-air_modes PROPERTIES DEFINE_SYMBOL "AIR_MODES_EXPORTS")
+set_target_properties(gnuradio-air_modes PROPERTIES SOVERSION "${VERSION_MAJOR}")
+set_target_properties(gnuradio-air_modes PROPERTIES VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 
 if(APPLE)
-    set_target_properties(air_modes PROPERTIES
+    set_target_properties(gnuradio-air_modes PROPERTIES
         INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
     )
 endif(APPLE)
@@ -46,7 +53,7 @@ endif(APPLE)
 # Install built library files
 ########################################################################
 include(GrMiscUtils)
-GR_LIBRARY_FOO(air_modes)
+GR_LIBRARY_FOO(gnuradio-air_modes)
 
 ########################################################################
 # Print summary

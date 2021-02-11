@@ -28,10 +28,10 @@
 #include <ciso646>
 #include "slicer_impl.h"
 #include <gnuradio/io_signature.h>
-#include <gr_air_modes/types.h>
+#include <air_modes/types.h>
 #include <sstream>
 #include <iomanip>
-#include <gr_air_modes/modes_crc.h>
+#include <air_modes/modes_crc.h>
 #include <iostream>
 #include <gnuradio/tags.h>
 
@@ -42,15 +42,16 @@ extern "C"
 }
 
 namespace gr {
+namespace air_modes {
 
-air_modes::slicer::sptr air_modes::slicer::make(gr::msg_queue::sptr queue) {
-    return gnuradio::get_initial_sptr(new air_modes::slicer_impl(queue));
+slicer::sptr slicer::make(gr::msg_queue::sptr queue) {
+    return gnuradio::make_block_sptr<slicer_impl>(queue);
 }
 
-air_modes::slicer_impl::slicer_impl(gr::msg_queue::sptr queue) :
+slicer_impl::slicer_impl(gr::msg_queue::sptr queue) :
   gr::sync_block ("slicer",
-                  gr::io_signature::make (1, 1, sizeof(float)),
-                  gr::io_signature::make (0, 0, 0) )
+                  gr::io_signature::make(1, 1, sizeof(float)),
+                  gr::io_signature::make(0, 0, 0))
 {
     //initialize private data here
     d_chip_rate = 2000000; //2Mchips per second
@@ -99,9 +100,9 @@ static slice_result_t llslicer(const float bit0, const float bit1, const float r
     return result;
 }
 
-int air_modes::slicer_impl::work(int noutput_items,
-                          gr_vector_const_void_star &input_items,
-                          gr_vector_void_star &output_items)
+int slicer_impl::work(int noutput_items,
+                      gr_vector_const_void_star &input_items,
+                      gr_vector_void_star &output_items)
 {
     const float *in = (const float *) input_items[0];
     int size = noutput_items - d_check_width; //since it's a sync block, i assume that it runs with ninput_items = noutput_items
@@ -197,4 +198,5 @@ int air_modes::slicer_impl::work(int noutput_items,
     return size;
 }
 
+} //namespace air_modes
 } //namespace gr

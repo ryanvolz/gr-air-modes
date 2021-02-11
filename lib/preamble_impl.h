@@ -3,8 +3,8 @@
 #define _AIR_MODES_PREAMBLE_IMPL_H_
 
 #include <gnuradio/block.h>
-#include <gr_air_modes/api.h>
-#include <gr_air_modes/preamble.h>
+#include <air_modes/api.h>
+#include <air_modes/preamble.h>
 
 namespace gr {
 namespace air_modes {

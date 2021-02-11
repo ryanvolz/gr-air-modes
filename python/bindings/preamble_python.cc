@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(preamble.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(99cc0f448ffd5f8da017452a42ffb8c1)                     */
+/* BINDTOOL_HEADER_FILE_HASH(7ce2f89dad5c95a56a123d11871bad67)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,25 +23,53 @@
 
 namespace py = pybind11;
 
-#include <air-modes/preamble.h>
+#include <air_modes/preamble.h>
 // pydoc.h is automatically generated in the build directory
 #include <preamble_pydoc.h>
 
 void bind_preamble(py::module& m)
 {
 
-    using preamble    = gr::air-modes::preamble;
+    using preamble    = ::gr::air_modes::preamble;
 
 
     py::class_<preamble, gr::block, gr::basic_block,
         std::shared_ptr<preamble>>(m, "preamble", D(preamble))
 
         .def(py::init(&preamble::make),
+           py::arg("channel_rate"),
+           py::arg("threshold_db"),
            D(preamble,make)
         )
         
 
 
+
+
+        
+        .def("set_rate",&preamble::set_rate,       
+            py::arg("channel_rate"),
+            D(preamble,set_rate)
+        )
+
+
+        
+        .def("set_threshold",&preamble::set_threshold,       
+            py::arg("threshold_db"),
+            D(preamble,set_threshold)
+        )
+
+
+        
+        .def("get_rate",&preamble::get_rate,       
+            D(preamble,get_rate)
+        )
+
+
+        
+        .def("get_threshold",&preamble::get_threshold,       
+            D(preamble,get_threshold)
+        )
 
         ;
 

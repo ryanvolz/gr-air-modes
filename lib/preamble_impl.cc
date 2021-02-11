@@ -33,15 +33,19 @@
 #include <gnuradio/tags.h>
 
 namespace gr {
+namespace air_modes {
 
-air_modes::preamble::sptr air_modes::preamble::make(float channel_rate, float threshold_db) {
-    return gnuradio::get_initial_sptr(new air_modes::preamble_impl(channel_rate, threshold_db));
+using input_type = float;
+using output_type = float;
+
+preamble::sptr preamble::make(float channel_rate, float threshold_db) {
+    return gnuradio::make_block_sptr<preamble_impl>(channel_rate, threshold_db);
 }
 
-air_modes::preamble_impl::preamble_impl(float channel_rate, float threshold_db) :
-        gr::block ("preamble",
-           gr::io_signature::make2 (2, 2, sizeof(float), sizeof(float)), //stream 0 is received data, stream 1 is moving average for reference
-           gr::io_signature::make (1, 1, sizeof(float))) //the output soft symbols
+preamble_impl::preamble_impl(float channel_rate, float threshold_db)
+    : gr::block ("preamble",
+           gr::io_signature::make(2, 2, sizeof(input_type)),
+           gr::io_signature::make(1, 1, sizeof(output_type)))
 {
     d_chip_rate = 2000000; //2Mchips per second
     set_rate(channel_rate);
@@ -62,16 +66,16 @@ void air_modes::preamble_impl::set_rate(float channel_rate) {
     set_history(d_samples_per_symbol);
 }
 
-void air_modes::preamble_impl::set_threshold(float threshold_db) {
+void preamble_impl::set_threshold(float threshold_db) {
     d_threshold_db = threshold_db;
     d_threshold = powf(10., threshold_db/20.); //the level that the sample must be above the moving average in order to qualify as a pulse
 }
 
-float air_modes::preamble_impl::get_threshold(void) {
+float preamble_impl::get_threshold(void) {
     return d_threshold_db;
 }
 
-float air_modes::preamble_impl::get_rate(void) {
+float preamble_impl::get_rate(void) {
     return d_sample_rate;
 }
 
@@ -136,7 +140,7 @@ static pmt::pmt_t tag_to_timestamp(gr::tag_t tstamp, uint64_t abs_sample_cnt, in
     return tstime;
 }
 
-int air_modes::preamble_impl::general_work(int noutput_items,
+int preamble_impl::general_work(int noutput_items,
                           gr_vector_int &ninput_items,
                           gr_vector_const_void_star &input_items,
                           gr_vector_void_star &output_items)
@@ -245,4 +249,5 @@ int air_modes::preamble_impl::general_work(int noutput_items,
     return 0;
 }
 
+} //namespace air_modes
 } //namespace gr

@@ -7,7 +7,7 @@
  *
  */
 #include "pydoc_macros.h"
-#define D(...) DOC(gr,air-modes, __VA_ARGS__ )
+#define D(...) DOC(gr,air_modes, __VA_ARGS__ )
 /*
   This file contains placeholders for docstrings for the Python bindings.
   Do not edit! These were automatically extracted during the binding process
@@ -16,12 +16,27 @@
 
 
  
- static const char *__doc_gr_air-modes_preamble = R"doc()doc";
+ static const char *__doc_gr_air_modes_preamble = R"doc()doc";
 
 
- static const char *__doc_gr_air-modes_preamble_preamble = R"doc()doc";
+ static const char *__doc_gr_air_modes_preamble_preamble_0 = R"doc()doc";
 
 
- static const char *__doc_gr_air-modes_preamble_make = R"doc()doc";
+ static const char *__doc_gr_air_modes_preamble_preamble_1 = R"doc()doc";
+
+
+ static const char *__doc_gr_air_modes_preamble_make = R"doc()doc";
+
+
+ static const char *__doc_gr_air_modes_preamble_set_rate = R"doc()doc";
+
+
+ static const char *__doc_gr_air_modes_preamble_set_threshold = R"doc()doc";
+
+
+ static const char *__doc_gr_air_modes_preamble_get_rate = R"doc()doc";
+
+
+ static const char *__doc_gr_air_modes_preamble_get_threshold = R"doc()doc";
 
   

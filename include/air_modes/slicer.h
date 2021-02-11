@@ -23,8 +23,8 @@
 #ifndef INCLUDED_AIR_MODES_SLICER_H
 #define INCLUDED_AIR_MODES_SLICER_H
 
-#include <gnuradio/block.h>
-#include <gr_air_modes/api.h>
+#include <air_modes/api.h>
+#include <gnuradio/sync_block.h>
 #include <gnuradio/msg_queue.h>
 
 namespace gr {
