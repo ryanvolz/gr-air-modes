@@ -10,7 +10,7 @@ from air_modes import mlat
 import sqlite3
 import string, threading, math, time
 from air_modes.sql import output_sql
-from Quaternion import Quat
+from .Quaternion import Quat
 import numpy
 from air_modes.exceptions import *
 
@@ -69,7 +69,7 @@ class output_flightgear:
                and (icao24 in self.velocities)\
                and (icao24 in self.callsigns)
         if complete:
-            print("FG update: %s" % (self.callsigns[icao24][0]))
+            print(("FG update: %s" % (self.callsigns[icao24][0])))
             msg = fg_posmsg(self.callsigns[icao24][0],
                             self.callsigns[icao24][1],
                             self.positions[icao24][0],

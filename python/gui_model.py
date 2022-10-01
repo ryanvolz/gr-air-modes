@@ -121,8 +121,8 @@ class dashboard_data_model(QtCore.QAbstractTableModel):
             icaos.append(record["icao"])
             newrowoffset = sorted(icaos).index(record["icao"])
             self.beginInsertRows(QtCore.QModelIndex(), newrowoffset, newrowoffset)
-            newrecord = [None for x in xrange(len(self._colnames))]
-            for col in xrange(0, len(self._colnames)):
+            newrecord = [None for x in range(len(self._colnames))]
+            for col in range(0, len(self._colnames)):
                 if self._colnames[col] in record:
                     newrecord[col] = record[self._colnames[col]]
             self._data.append(newrecord)

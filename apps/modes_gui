@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright 2012 Nick Foster
 # 
 # This file is part of gr-air-modes
@@ -19,10 +19,12 @@
 # Boston, MA 02110-1301, USA.
 # 
 
-import os, sys, time, threading, datetime, math, csv, tempfile, ConfigParser
+import os, sys, time, threading, datetime, math, csv, tempfile, configparser
 from optparse import OptionParser
-from PyQt4 import QtCore,QtGui,QtWebKit
-from PyQt4.Qwt5 import Qwt
+from PyQt5 import QtCore,QtGui
+from PyQt5 import Qwt
+from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
+from PyQt5.QtWebEngineWidgets import QWebEngineSettings as QWebSettings
 from gnuradio import gr, eng_notation
 from gnuradio.eng_option import eng_option
 from gnuradio.gr.pubsub import pubsub
@@ -372,7 +374,7 @@ class mainwindow(QtGui.QMainWindow):
             self._htmlfile.flush()
             class WebPage(QtWebKit.QWebPage):
                 def javaScriptConsoleMessage(self, msg, line, source):
-                    print('%s line %d: %s' % (source, line, msg))
+                    print(('%s line %d: %s' % (source, line, msg)))
             page = WebPage()
             self.ui.mapView.setPage(page)
             self.ui.mapView.load( QtCore.QUrl( QtCore.QUrl.fromLocalFile("/tmp/mode_s.html") ) )
@@ -477,22 +479,22 @@ class mainwindow(QtGui.QMainWindow):
         defaults["longitude"] = None
         defaults["apikey"] = None
 
-        prefs = ConfigParser.ConfigParser(defaults)
+        prefs = configparser.ConfigParser(defaults)
         prefs.optionxform = str
 
         try:
             prefs.read(os.path.expanduser(self.opt_file))
             for item in prefs.items("GUI"):
                 defaults[item[0]] = item[1]
-        except (IOError, ConfigParser.NoSectionError):
-            print("No preferences file %s found, creating..." % os.path.expanduser(self.opt_file))
+        except (IOError, configparser.NoSectionError):
+            print(("No preferences file %s found, creating..." % os.path.expanduser(self.opt_file)))
             self.write_defaults(defaults)
 
         return defaults
 
 
     def write_defaults(self, defaults):
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         config.add_section('GUI')
 
         for item in defaults:

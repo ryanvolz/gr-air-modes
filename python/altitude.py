@@ -135,10 +135,10 @@ if __name__ == "__main__":
                 for alt in range(-1000, 101400, 25):
                         dec = decode_alt(encode_alt_modes(alt, False), False)
                         if dec != alt:
-                                print("Failure at %i with bit13 clear (got %s)" % (alt, dec))
+                                print(("Failure at %i with bit13 clear (got %s)" % (alt, dec)))
                 for alt in range(-1000, 101400, 25):
                         dec = decode_alt(encode_alt_modes(alt, True), True)
                         if dec != alt:
-                                print("Failure at %i with bit13 set (got %s)" % (alt, dec))
+                                print(("Failure at %i with bit13 set (got %s)" % (alt, dec)))
         except MetricAltError:
-                print("Failure at %i due to metric alt bit" % alt)
+                print(("Failure at %i due to metric alt bit" % alt))

@@ -305,8 +305,8 @@ if __name__ == '__main__':
             raise Exception("CPR test failure: no decode after even/odd inputs")
 
         if abs(odddeclat - odd_lat) > threshold or abs(odddeclon - odd_lon) > threshold:
-            print("F odddeclat: %f odd_lat: %f" % (odddeclat, odd_lat))
-            print( "F odddeclon: %f odd_lon: %f" % (odddeclon, odd_lon))
+            print(("F odddeclat: %f odd_lat: %f" % (odddeclat, odd_lat)))
+            print(( "F odddeclon: %f odd_lon: %f" % (odddeclon, odd_lon)))
             raise Exception("CPR test failure: global decode error greater than threshold")
 #       else:
 #           print("S odddeclat: %f odd_lat: %f" % (odddeclat, odd_lat))
@@ -325,8 +325,8 @@ if __name__ == '__main__':
 
         #check to see if the positions were valid
         if abs(evendeclat - nexteven_lat) > threshold or abs(evendeclon - nexteven_lon) > threshold:
-            print("F evendeclat: %f nexteven_lat: %f evenlat: %f" % (evendeclat, nexteven_lat, even_lat))
-            print("F evendeclon: %f nexteven_lon: %f evenlon: %f" % (evendeclon, nexteven_lon, even_lon))
+            print(("F evendeclat: %f nexteven_lat: %f evenlat: %f" % (evendeclat, nexteven_lat, even_lat)))
+            print(("F evendeclon: %f nexteven_lon: %f evenlon: %f" % (evendeclon, nexteven_lon, even_lon)))
             raise Exception("CPR test failure: local decode error greater than threshold")
 
-    print("CPR test successful. There were %i boundary straddles over %i rounds." % (bs, rounds))
+    print(("CPR test successful. There were %i boundary straddles over %i rounds." % (bs, rounds)))

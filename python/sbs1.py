@@ -82,7 +82,7 @@ class output_sbs1:
     # dictionary is getting too large.
     if len(self._aircraft_id_map) > 1e4:
       minimum = min(self._aircraft_id_map.values()) + (len(self._aircraft_id_map) - 1e4)
-      for icao, _id in dict(self._aircraft_id_map).iteritems():
+      for icao, _id in dict(self._aircraft_id_map).items():
         if _id < minimum:
             del self._aircraft_id_map[icao]
 
@@ -98,7 +98,7 @@ class output_sbs1:
           conn.send(sbs1_bytes)
     except socket.error:
       self._conns.remove(conn)
-      print("Connections: ", len(self._conns))
+      print(("Connections: ", len(self._conns)))
     except ADSBError:
       pass
 
@@ -106,7 +106,7 @@ class output_sbs1:
     try:
       conn, addr = self._s.accept()
       self._conns.append(conn)
-      print("Connections: ", len(self._conns))
+      print(("Connections: ", len(self._conns)))
     except socket.error:
       pass
 
