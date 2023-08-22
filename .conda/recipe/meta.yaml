@@ -1,0 +1,95 @@
+{% set oot_name = "air_modes" %}
+{% set name = "gnuradio-" + oot_name %}
+# Set package version from cleaned up git tags if possible,
+# otherwise fall back to date-based version.
+{% set tag_version = environ.get("GIT_DESCRIBE_TAG", "")|string|replace("-","_")|replace("v","")|replace("git","") %}
+{% set post_commit = environ.get("GIT_DESCRIBE_NUMBER", 0)|string %}
+{% set hash = environ.get("GIT_DESCRIBE_HASH", "local")|string %}
+{% set fallback_version = "0.0.0.{0}.dev+g{1}".format(datetime.datetime.now().strftime("%Y%m%d"), environ.get("GIT_FULL_HASH", "local")[:9]) %}
+{% set version = (tag_version if post_commit == "0" else "{0}.post{1}+{2}".format(tag_version, post_commit, hash)) if tag_version else fallback_version %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  # use local path or git repository depending on if the build is local or done on CI
+  path: "../.."  # [not os.environ.get("CI")]
+  git_url: {{ environ.get('FEEDSTOCK_ROOT', "../..") }}  # [os.environ.get("CI")]
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - cmake
+    - git
+    - ninja
+    - pkg-config
+    # cross-compilation requirements
+    - python                              # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - pybind11                            # [build_platform != target_platform]
+
+  host:
+    - gmp  # [linux]
+    # the following two entries are for generating builds against specific GR versions
+    - gnuradio-core  # [not gnuradio_extra_pin]
+    - gnuradio-core {{ gnuradio_extra_pin }}.*  # [gnuradio_extra_pin]
+    - pip  # [win]
+    - pybind11
+    - python
+    - numpy
+    - volk
+
+  run:
+    - numpy
+    - pyqt
+    - python
+    - pyzmq
+
+test:
+  commands:
+    # verify that commands run
+    - modes_rx --help
+    - modes_gui --help
+
+    # verify that (some) headers get installed
+    - test -f $PREFIX/include/gr_{{ oot_name }}/api.h  # [not win]
+    - if not exist %PREFIX%\\Library\\include\\gr_{{ oot_name }}\\api.h exit 1  # [win]
+
+    # verify that libraries get installed
+    - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+    - if not exist %PREFIX%\\Library\\bin\\{{ name }}.dll exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\{{ name }}.lib exit 1  # [win]
+
+  imports:
+    # verify that the python module imports
+    - {{ oot_name }}
+
+about:
+  home: https://github.com/bistromath/gr-air-modes
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: GNU Radio Mode-S/ADS-B radio
+  description: >
+    gr-air-modes implements a software-defined radio receiver for Mode S
+    transponder signals, including ADS-B reports from equipped aircraft.
+
+    The receiver `modes_rx` is written for use with Ettus Research USRP
+    devices, although the "RTLSDR" receivers are also supported via the
+    Osmocom driver. In theory, any receiver which outputs complex samples at
+    at least 2Msps should work via the file input or UDP input options, or
+    by means of a Gnuradio interface. Multiple output formats are supported:
+
+    * Raw (or minimally processed) output of packet data
+    * Parsed text
+    * SQLite database
+    * KML for use with Google Earth
+    * SBS-1-compatible output for use with e.g. PlanePlotter or Virtual
+    Radar Server
+    * FlightGear multiplayer interface for real-time display of traffic
+    within the simulator
