@@ -43,13 +43,15 @@ requirements:
     - pybind11
     - python
     - numpy
-    - volk
+    - qwt
 
   run:
     - numpy
     - pyqt
     - python
     - pyzmq
+    - {{ pin_compatible('qwt', max_pin='x.x') }}
+    - scipy
 
 test:
   commands:
