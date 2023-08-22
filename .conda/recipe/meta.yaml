@@ -41,6 +41,7 @@ requirements:
     - gnuradio-core {{ gnuradio_extra_pin }}.*  # [gnuradio_extra_pin]
     - pip  # [win]
     - pybind11
+    - pyqt
     - python
     - numpy
     - qwt
