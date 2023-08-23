@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
-    <height>454</height>
+    <width>759</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -85,7 +85,7 @@
            </sizepolicy>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="setup">
            <property name="sizePolicy">
@@ -892,7 +892,7 @@
              <string>Climb</string>
             </property>
            </widget>
-           <widget class="QwtCompass" name="compass_heading" native="true">
+           <widget class="Compass" name="compass_heading" native="true">
             <property name="geometry">
              <rect>
               <x>200</x>
@@ -937,7 +937,7 @@
              <bool>true</bool>
             </property>
            </widget>
-           <widget class="QwtCompass" name="compass_bearing" native="true">
+           <widget class="Compass" name="compass_bearing" native="true">
             <property name="geometry">
              <rect>
               <x>-20</x>
@@ -1054,8 +1054,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>719</width>
-     <height>25</height>
+     <width>759</width>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -1063,25 +1063,21 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QwtDial</class>
-   <extends>QWidget</extends>
-   <header>qwt_dial.h</header>
-  </customwidget>
-  <customwidget>
    <class>az_map</class>
    <extends>QWidget</extends>
    <header location="global">air_modes/az_map</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QwtCompass</class>
-   <extends>QwtDial</extends>
-   <header>qwt_compass.h</header>
-  </customwidget>
-  <customwidget>
    <class>QWebView</class>
    <extends>QWidget</extends>
    <header location="global">QtWebKit/qwebview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Compass</class>
+   <extends>QWidget</extends>
+   <header location="global">gnuradio/qtgui/compass.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -25,40 +25,22 @@ if(NOT PYTHONINTERP_FOUND)
     return()
 endif()
 
-find_package(PyQt4)
-if(NOT PYQT4_FOUND)
-    message(STATUS "PyQt4 not found, not installing GUI application")
-    return()
-endif()
-
-if(NOT PYUIC4_FOUND)
-    message(STATUS "pyuic4 not found, not installing GUI application")
-    return()
-endif()
-
-find_package(Qwt)
-if(NOT QWT_FOUND)
-    message(STATUS "Qwt not found, not installing GUI application")
+gr_python_check_module("PyQt5" PyQt5 True PYQT5_FOUND)
+if(NOT PYQT5_FOUND)
+    message(STATUS "PyQt5 not found, not installing GUI application")
     return()
 endif()
 
 set(RX_UI_SRC ${CMAKE_CURRENT_SOURCE_DIR}/modes_rx.ui)
-set(RX_UI_PY_PRE_MASSAGE ${CMAKE_CURRENT_BINARY_DIR}/modes_rx_ui_borked.py)
 set(RX_UI_PY ${CMAKE_CURRENT_BINARY_DIR}/modes_rx_ui.py)
-set(PYUIC_MASSAGER sed "s/from qwt.* import/from PyQt4.Qwt5.Qwt import/")
 
 add_custom_target(rx_ui ALL
     DEPENDS ${RX_UI_PY}
 )
 
-add_custom_command(OUTPUT ${RX_UI_PY_PRE_MASSAGE}
-    COMMAND ${PYUIC4_EXECUTABLE} ${RX_UI_SRC} > ${RX_UI_PY_PRE_MASSAGE}
-    MAIN_DEPENDENCY ${RX_UI_SRC}
-)
-
 add_custom_command(OUTPUT ${RX_UI_PY}
-    COMMAND ${PYUIC_MASSAGER} ${RX_UI_PY_PRE_MASSAGE} > ${RX_UI_PY}
-    MAIN_DEPENDENCY ${RX_UI_PY_PRE_MASSAGE}
+    COMMAND ${PYTHON_EXECUTABLE} -m PyQt5.uic.pyuic ${RX_UI_SRC} > ${RX_UI_PY}
+    MAIN_DEPENDENCY ${RX_UI_SRC}
 )
 
 ########################################################################

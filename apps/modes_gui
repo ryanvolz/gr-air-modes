@@ -22,7 +22,6 @@
 import os, sys, time, threading, datetime, math, csv, tempfile, configparser
 from optparse import OptionParser
 from PyQt5 import QtCore,QtGui
-from PyQt5 import Qwt
 from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
 from PyQt5.QtWebEngineWidgets import QWebEngineSettings as QWebSettings
 from gnuradio import gr, eng_notation
@@ -134,8 +133,6 @@ class mainwindow(QtGui.QMainWindow):
         self.ui.compass_heading.setPalette(compass_palette)
         self.ui.compass_bearing.setPalette(compass_palette)
         #TODO: change the needle to an aircraft silhouette
-        self.ui.compass_heading.setNeedle(Qwt.QwtDialSimpleNeedle(Qwt.QwtDialSimpleNeedle.Ray, False, QtCore.Qt.black))
-        self.ui.compass_bearing.setNeedle(Qwt.QwtDialSimpleNeedle(Qwt.QwtDialSimpleNeedle.Ray, False, QtCore.Qt.black))
 
         #hook up the update signal
         self.ui.list_aircraft.selectionModel().currentRowChanged.connect(self.dashboard_mapper.setCurrentModelIndex)
@@ -170,12 +167,12 @@ class mainwindow(QtGui.QMainWindow):
     def update_heading_widget(self, index):
         if index.model() is not None:
             heading = index.model().data(index.model().index(index.row(), self.datamodel._colnames.index("heading"))).toDouble()[0]
-            self.ui.compass_heading.setValue(heading)
+            self.ui.compass_heading.change_angle(heading)
 
     def update_bearing_widget(self, index):
         if index.model() is not None:
             bearing = index.model().data(index.model().index(index.row(), self.datamodel._colnames.index("bearing"))).toDouble()[0]
-            self.ui.compass_bearing.setValue(bearing)
+            self.ui.compass_bearing.change_angle(bearing)
 
     def unmapped_widgets_dataChanged(self, startIndex, endIndex):
         index = self.ui.list_aircraft.selectionModel().currentIndex()
