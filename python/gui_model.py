@@ -22,7 +22,7 @@
 # This file contains data models, view delegates, and associated classes
 # for handling the GUI back end data model.
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 import air_modes
 import threading, math, time
 from air_modes.exceptions import *

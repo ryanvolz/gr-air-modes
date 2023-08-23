@@ -22,7 +22,7 @@
 
 # azimuthal projection widget to plot reception range vs. azimuth
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 import threading
 import math
 from air_modes.exceptions import *
