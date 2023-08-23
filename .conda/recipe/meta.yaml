@@ -49,6 +49,7 @@ requirements:
     - gnuradio-qtgui
     - numpy
     - pyqt
+    - pyqtwebengine
     - python
     - pyzmq
     - scipy
