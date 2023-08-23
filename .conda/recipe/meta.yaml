@@ -44,14 +44,13 @@ requirements:
     - pyqt
     - python
     - numpy
-    - qwt
 
   run:
+    - gnuradio-qtgui
     - numpy
     - pyqt
     - python
     - pyzmq
-    - {{ pin_compatible('qwt', max_pin='x.x') }}
     - scipy
 
 test:
