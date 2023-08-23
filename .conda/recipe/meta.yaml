@@ -49,7 +49,7 @@ requirements:
     - gnuradio-qtgui
     - numpy
     - pyqt
-    - pyqtwebengine
+    - pyqtwebengine  # [not ppc64le]
     - python
     - pyzmq
     - scipy
@@ -58,7 +58,7 @@ test:
   commands:
     # verify that commands run
     - modes_rx --help
-    - modes_gui --help
+    - modes_gui --help  # [not ppc64le]
 
     # verify that (some) headers get installed
     - test -f $PREFIX/include/gr_{{ oot_name }}/api.h  # [not win]
