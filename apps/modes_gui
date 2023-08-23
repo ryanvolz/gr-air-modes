@@ -367,7 +367,7 @@ class mainwindow(QtGui.QMainWindow):
             htmlstring = air_modes.html_template(my_apikey, my_position, self._jsonfile.name)
             self._htmlfile.write(htmlstring)
             self._htmlfile.flush()
-            class WebPage(QtWebKit.QWebPage):
+            class WebPage(QWebPage):
                 def javaScriptConsoleMessage(self, msg, line, source):
                     print(('%s line %d: %s' % (source, line, msg)))
             page = WebPage()

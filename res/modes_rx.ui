@@ -85,7 +85,7 @@
            </sizepolicy>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="setup">
            <property name="sizePolicy">
@@ -970,7 +970,7 @@
            </attribute>
            <layout class="QGridLayout" name="gridLayout_8">
             <item row="0" column="0">
-             <widget class="QWebView" name="mapView" native="true"/>
+             <widget class="QWebEngineView" name="mapView"/>
             </item>
            </layout>
           </widget>
@@ -1063,15 +1063,14 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
+  <customwidget>
    <class>az_map</class>
    <extends>QWidget</extends>
    <header location="global">air_modes/az_map</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header location="global">QtWebKit/qwebview.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
