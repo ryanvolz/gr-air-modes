@@ -22,7 +22,7 @@
 
 # azimuthal projection widget to plot reception range vs. azimuth
 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 import threading
 import math
 from air_modes.exceptions import *
@@ -83,7 +83,7 @@ class az_map_model(QtCore.QObject):
 
 
 # the azimuth map widget
-class az_map(QtGui.QWidget):
+class az_map(QtWidgets.QWidget):
     maxrange = 200
     bgcolor = QtCore.Qt.black
     ringpen =  QtGui.QPen(QtGui.QColor(0,   96,  127, 255), 1.3)
@@ -222,11 +222,11 @@ class model_updater(threading.Thread):
                 for alt in self.model._altitudes:
                     self.model.addRecord(i*360./az_map_model.npoints, alt, random.randint(0,az_map.maxrange)*alt / max(self.model._altitudes))
         self.done = True
-        
-class Window(QtGui.QWidget):
+
+class Window(QtWidgets.QWidget):
     def __init__(self):
         super(Window, self).__init__()
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         self.model = az_map_model()
         mymap = az_map(None)
         mymap.setModel(self.model)
@@ -238,7 +238,7 @@ if __name__ == '__main__':
 
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = Window()
     window.show()
     window.update()

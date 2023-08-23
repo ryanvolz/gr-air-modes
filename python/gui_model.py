@@ -22,17 +22,17 @@
 # This file contains data models, view delegates, and associated classes
 # for handling the GUI back end data model.
 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 import air_modes
 import threading, math, time
 from air_modes.exceptions import *
 
 #fades the ICAOs out as their last report gets older,
 #and display ident if available, ICAO otherwise
-class ICAOViewDelegate(QtGui.QStyledItemDelegate):
+class ICAOViewDelegate(QtWidgets.QStyledItemDelegate):
     def paint(self, painter, option, index):
         #draw selection rectangle
-        if option.state & QtGui.QStyle.State_Selected:
+        if option.state & QtWidgets.QStyle.State_Selected:
             painter.setBrush(QtGui.QPalette().highlight())
             painter.drawRect(option.rect)
 
