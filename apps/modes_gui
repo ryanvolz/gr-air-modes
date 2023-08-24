@@ -495,7 +495,7 @@ class mainwindow(QtWidgets.QMainWindow):
 
         for key, val in defaults.items():
             if val is not None:
-                config.set('GUI', item, str(val))
+                config.set('GUI', key, str(val))
 
         dirname = os.path.dirname(os.path.expanduser(self.opt_file))
         if not os.path.exists(dirname):
