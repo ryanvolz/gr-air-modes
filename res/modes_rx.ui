@@ -892,7 +892,7 @@
              <string>Climb</string>
             </property>
            </widget>
-           <widget class="Compass" name="compass_heading" native="true">
+           <widget class="CompassWidget" name="compass_heading" native="true">
             <property name="geometry">
              <rect>
               <x>200</x>
@@ -937,7 +937,7 @@
              <bool>true</bool>
             </property>
            </widget>
-           <widget class="Compass" name="compass_bearing" native="true">
+           <widget class="CompassWidget" name="compass_bearing" native="true">
             <property name="geometry">
              <rect>
               <x>-20</x>
@@ -1074,7 +1074,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Compass</class>
+   <class>CompassWidget</class>
    <extends>QWidget</extends>
    <header location="global">air_modes/compass</header>
    <container>1</container>
