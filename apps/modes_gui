@@ -35,10 +35,10 @@ from air_modes.az_map import *
 import sqlite3
 import zmq
 
-class mainwindow(QtGui.QMainWindow):
+class mainwindow(QtWidgets.QMainWindow):
     live_data_changed_signal = QtCore.pyqtSignal(QtCore.QString, name='liveDataChanged')
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -114,7 +114,7 @@ class mainwindow(QtGui.QMainWindow):
         #set up dashboard views
         self.icaodelegate = ICAOViewDelegate()
         self.ui.list_aircraft.setItemDelegate(self.icaodelegate)
-        self.dashboard_mapper = QtGui.QDataWidgetMapper()
+        self.dashboard_mapper = QtWidgets.QDataWidgetMapper()
         self.dashboard_mapper.setModel(self.datamodel)
         self.dashboard_mapper.addMapping(self.ui.line_icao, 0)
         #self.dashboard_mapper.addMapping(self.ui.prog_rssi, 2)
@@ -504,7 +504,7 @@ class mainwindow(QtGui.QMainWindow):
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = mainwindow()
     app.lastWindowClosed.connect(window.on_quit)
     window.setWindowTitle("Mode S/ADS-B receiver")
