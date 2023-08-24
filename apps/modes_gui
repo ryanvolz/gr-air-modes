@@ -474,7 +474,8 @@ class mainwindow(QtWidgets.QMainWindow):
         defaults["longitude"] = None
         defaults["apikey"] = None
 
-        prefs = configparser.ConfigParser(defaults)
+        # override defaults from any previously-saved config values
+        prefs = configparser.ConfigParser()
         prefs.optionxform = str
 
         try:
@@ -492,8 +493,9 @@ class mainwindow(QtWidgets.QMainWindow):
         config = configparser.RawConfigParser()
         config.add_section('GUI')
 
-        for item in defaults:
-            config.set('GUI', item, str(defaults[item]))
+        for key, val in defaults.items():
+            if val is not None:
+                config.set('GUI', item, str(val))
 
         dirname = os.path.dirname(os.path.expanduser(self.opt_file))
         if not os.path.exists(dirname):
