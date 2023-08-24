@@ -58,7 +58,7 @@ test:
   commands:
     # verify that commands run
     - modes_rx --help
-    - modes_gui --help  # [not ppc64le]
+    - QT_QPA_PLATFORM=offscreen modes_gui --help  # [not ppc64le]
 
     # verify that (some) headers get installed
     - test -f $PREFIX/include/gr_{{ oot_name }}/api.h  # [not win]
