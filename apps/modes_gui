@@ -36,7 +36,7 @@ import sqlite3
 import zmq
 
 class mainwindow(QtWidgets.QMainWindow):
-    live_data_changed_signal = QtCore.pyqtSignal(QtCore.QString, name='liveDataChanged')
+    live_data_changed_signal = QtCore.pyqtSignal('QString', name='liveDataChanged')
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
