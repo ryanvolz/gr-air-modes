@@ -501,7 +501,7 @@ class mainwindow(QtWidgets.QMainWindow):
         if not os.path.exists(dirname):
             os.makedirs(dirname)
 
-        with open(os.path.expanduser(self.opt_file), 'wb') as prefsfile:
+        with open(os.path.expanduser(self.opt_file), 'w') as prefsfile:
             config.write(prefsfile)
 
 
