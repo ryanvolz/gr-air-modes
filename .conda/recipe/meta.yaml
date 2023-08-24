@@ -54,10 +54,13 @@ requirements:
     - scipy
 
 test:
+  requires:
+    - coreutils  # [not win]
   commands:
     # verify that commands run
     - modes_rx --help
-    - QT_QPA_PLATFORM=offscreen modes_gui --help  # [not ppc64le]
+    - QT_QPA_PLATFORM=offscreen timeout --preserve-status 10 modes_gui || [[ $? -eq 143 ]]  # [not win and not ppc64le]
+    - start modes_gui && ping -n 10 127.0.0.1 >nul && taskkill /im modes_gui.exe /f  # [win]
 
     # verify that (some) headers get installed
     - test -f $PREFIX/include/gr_{{ oot_name }}/api.h  # [not win]
