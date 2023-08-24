@@ -34,7 +34,7 @@ import numpy as np
 # assumes that if you can hear ac at 1000', you can hear at 5000'+.
 class az_map_model(QtCore.QObject):
     dataChanged = QtCore.pyqtSignal(name='dataChanged')
-    npoints = 360/5
+    npoints = 360 // 5
     def __init__(self, parent=None):
         super(az_map_model, self).__init__(parent)
         self._data = []
