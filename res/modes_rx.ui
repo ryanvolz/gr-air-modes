@@ -85,7 +85,7 @@
            </sizepolicy>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="setup">
            <property name="sizePolicy">
@@ -1076,7 +1076,7 @@
   <customwidget>
    <class>Compass</class>
    <extends>QWidget</extends>
-   <header location="global">gnuradio/qtgui/compass.h</header>
+   <header location="global">air_modes/compass</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

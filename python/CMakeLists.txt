@@ -33,6 +33,7 @@ GR_PYTHON_INSTALL(
     __init__.py
     altitude.py
     az_map.py
+    compass.py
     cpr.py
     html_template.py
     mlat.py
