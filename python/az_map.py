@@ -118,7 +118,7 @@ class az_map(QtWidgets.QWidget):
         #draw the range rings
         self.drawRangeRings(painter)
         for i in range(len(self._paths)):
-            alpha = 230 * (i+1) / (len(self._paths)) + 25
+            alpha = 230 * (i+1) // (len(self._paths)) + 25
             painter.setPen(QtGui.QPen(QtGui.QColor(alpha,alpha,0,255), 1.0))
             painter.drawPath(self._paths[i])
 
@@ -166,7 +166,7 @@ class az_map(QtWidgets.QWidget):
                                 -diameter / 2.0, diameter, diameter))
             painter.setPen(QtGui.QColor(255,127,0,255))
 
-            painter.drawText(0-70/2.0, diameter/2.0, 70, 30, QtCore.Qt.AlignHCenter,
+            painter.drawText(0-70 // 2, int(diameter // 2), 70, 30, QtCore.Qt.AlignHCenter,
                              "%.1fnm" % i)
 
     def setMaxRange(self, maxrange):
