@@ -46,7 +46,6 @@ requirements:
     - numpy
 
   run:
-    - gnuradio-qtgui
     - numpy
     - pyqt  # [not ppc64le]
     - pyqtwebengine  # [not ppc64le]
